@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Portfolio - Web Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Sevillana&display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    body {
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      /* background: linear-gradient(45deg, rgba(255,0,255,0.05), rgba(0,255,255,0.05), rgba(255,255,0,0.05)); */
+      background-size: 600% 600%;
+      z-index: 0;
+      animation: backgroundFlow 30s ease infinite;
+    }
+    @keyframes backgroundFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+  z-index: 10;
+  font-family: "Sevillana", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+
+  /* Neon white glow effect */
+  text-shadow: 
+    0 0 5px white,
+    0 0 10px white,
+    0 0 20px white,
+    0 0 40px white;
+}
+
+    .nav-buttons {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 10;
+    }
+    .bn5 {
+      padding: 0.6em 2em;
+      border: none;
+      outline: none;
+      color: rgb(255, 255, 255);
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+    }
+    .bn5:before {
+      content: "";
+      background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+      );
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowingbn5 20s linear infinite;
+      opacity: 0.1;
+      transition: opacity 0.3s ease-in-out;
+      border-radius: 10px;
+    }
+    .bn5:hover:before {
+      opacity: 1;
+    }
+    .bn5:after {
+      z-index: -1;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #191919;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+    }
+    .bn5:active {
+      color: #000;
+    }
+    .bn5:active:after {
+      background: transparent;
+    }
+    @keyframes glowingbn5 {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+    .section {
+      margin: 100px 0 50px;
+      text-align: center;
+    }
+    .about-split {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      margin-top: 100px;
+      padding: 2px;
+      position: relative;
+    }
+    @media(min-width: 768px) {
+      .about-split {
+        flex-direction: row;
+      }
+    }
+    .profile-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.2);
+    }
+    .profile-box:hover {
+      box-shadow: 0 0 40px rgba(0,255,255,0.4);
+    }
+    .profile {
+      width: 200px;
+      height: 200px;
+      background: url('your-profile.png') center/cover no-repeat;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    .profile:hover {
+      box-shadow: 0 0 60px rgba(255, 255, 255, 0.6);
+    }
+    .profile-box h2 {
+      margin: 15px 0 5px;
+    }
+    .profile-box p {
+      font-size: 1.1em;
+      color: #ccc;
+    }
+    .about-text {
+      max-width: 500px;
+      text-align: left;
+      padding: 30px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .about-text h2{
+      text-decoration: underline;
+    }
+
+    .about-text::before {
+      content: "";
+      background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+      );
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      border-radius: 20px;
+      opacity: 0.1;
+      animation: glowingbn5 20s linear infinite;
+      transition: opacity 0.3s ease-in-out;
+      pointer-events: none;
+    }
+    .skills {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    
+
+    #skills h2,
+#projects h2 {
+  text-decoration: underline;
+  font-size: 20px;
+  text-align: center;
+  margin: 20px auto;
+  width: fit-content; /* Keeps width just enough for the text */
+}
+
+
+    .card {
+  width: 150px;
+  height: 150px;
+  background: #111;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: border 0.3s ease;
+  z-index: 0; /* Ensure card is baseline */
+}
+
+.skills .card {
+  border: 2px solid #837676;
+}
+
+.skills .card:hover {
+  border: 2px solid #ddd174;
+}
+
+#projects .card {
+  border: 2px solid #0c9535;
+}
+
+#projects .card:hover {
+  border: 2px solid #14dc96;
+}
+
+.card img {
+  width: 150px;
+  height: 150px;
+  z-index: 0; /* Keep image below overlay */
+  pointer-events: none; /* Allows hover to reach parent */
+}
+
+.card p {
+  margin-top: 10px;
+  color: #ccc;
+  font-size: 0.95em;
+  position: relative;
+  z-index: 1;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 60px solid #444;
+  border-left: 60px solid transparent;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.card:hover::before {
+  border-top-width: 0;
+  border-left-width: 0;
+}
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #111;
+      color: #aaa;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 -5px 20px rgba(255,255,255,0.05);
+    }
+    .contact-form {
+      max-width: 600px;
+      margin: 40px auto 0;
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      position: relative;
+      z-index: 2;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: #fff;
+      position: relative;
+      z-index: 2;
+    }
+    .contact-form button {
+      margin-top: 10px;
+      z-index: 2;
+      position: relative;
+    }
+    .contact-icons {
+    font-size: 1.8rem;
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+    }
+
+    .contact-icons a {
+    margin: 0 15px;
+    color: #aaa;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s ease;
+    }
+
+    .contact-icons a:hover {
+    color: #fff;
+    }
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .bubble-group {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    animation: floatGroup 20s linear infinite;
+  }
+
+  .bubble-group svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes floatGroup {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-20vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /*visit-counter*/
+
+  .visit-counter {
+  width: 30px;
+  height: 30px;
+  background: #111;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(57, 131, 143);
+  border-radius: 8px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  box-shadow: 0 0 10px #0f0;
+  font-family: Arial, sans-serif;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <header>Satyam Diwaker's Portfolio</header>
+  <div class="nav-buttons">
+    <button class="bn5" onclick="window.open('resume.pdf', '_blank')">Resume</button>
+    <button class="bn5" onclick="window.location.href='#contact'">Hire Me</button>
+    <div class="visit-counter" id="visitBox">0</div>
+  </div>
+  <div class="background" id="background"></div>
+  <main>
+   
+    <!-- content remains same -->
+    <section class="section" id="about">
+      <div class="about-split">
+        <div class="profile-box">
+          <div class="profile" id="profile"></div>
+          <h2>Hello! I am Satyam Diwaker</h2>
+          <p>Front End Developer</p>
+        </div>
+        <div class="about-text">
+          <h2>About Me</h2>
+          <p>I am a web developer skilled in HTML, CSS, and JavaScript. I create interactive, animated, and modern user interfaces that are responsive and engaging. My goal is to build beautiful and accessible front-end applications with clean and efficient code.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <h2 class="bn5">Skills</h2>
+      <div class="skills">
+        <div class="card"><img src="html-logo.png" alt="HTML" /></div>
+        <div class="card"><img src="css-logo.png" alt="CSS" /></div>
+        <div class="card"><img src="js-logo.png" alt="JavaScript" /></div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <h2 class="bn5">Projects</h2>
+      <div class="skills">
+        <div class="card"><img src="project1-thumbnail.png" alt="Project 1"><p>Project One</p></div>
+        <div class="card"><img src="project2-thumbnail.png" alt="Project 2"><p>Project Two</p></div>
+        <div class="card"><img src="project3-thumbnail.png" alt="Project 3"><p>Project Three</p></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <section class="section" id="contact">
+      <h2>Contact Me</h2>
+        <div class="contact-icons">
+            <a href="mailto:satyamdiwaker863@gmail.com" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="tel:+917668894730" title="Phone">
+                <i class="fas fa-phone"></i>
+            </a>
+            <a href="https://github.com/Satyamdiwaker000001" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/satyam-diwaker-71139b2b3/" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+
+
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+        <form action="mailto:example@example.com" method="post" enctype="text/plain">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit" class="bn5">Send Message</button>
+        </form>
+      </div>
+    </section>
+    &copy; 2025 Satyam Diwaker. All rights reserved.
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+    const background = document.getElementById("background");
+const createGroup = (x, delay, duration, size) => {
+  const group = document.createElement("div");
+  group.className = "bubble-group";
+  group.style.left = `${x}%`;
+  group.style.animationDelay = `${delay}s`;
+  group.style.animationDuration = `${duration}s`;
+  group.style.setProperty('--scale', size);
+  group.style.visibility = 'hidden'; // Start hidden
+
+  group.innerHTML = `
+    <svg viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="1">
+      <circle cx="50" cy="50" r="12" />
+      <circle cx="80" cy="50" r="10" />
+      <circle cx="20" cy="50" r="10" />
+      <line x1="32" y1="50" x2="38" y2="50" />
+      <line x1="62" y1="50" x2="68" y2="50" />
+      <circle cx="65" cy="30" r="8" />
+      <circle cx="35" cy="30" r="8" />
+      <circle cx="50" cy="70" r="8" />
+    </svg>
+  `;
+
+  background.appendChild(group);
+
+  // Reveal just before animation starts
+  setTimeout(() => {
+    group.style.visibility = 'visible';
+  }, delay * 1000);
+};
+
+  for (let i = 0; i < 20; i++) {
+    const x = Math.random() * 100;
+    const delay = Math.random() * 10;
+    const duration = 15 + Math.random() * 10;
+    const size = 0.4 + Math.random() * 0.6;
+    createGroup(x, delay, duration, size);
+  }
+
+  // Optional: Interactive background shift
+  document.addEventListener("mousemove", (e) => {
+    const x = e.clientX / window.innerWidth - 0.5;
+    const y = e.clientY / window.innerHeight - 0.5;
+    background.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
+  });
+
+
+  //-----------------//
+  //--visit counter--//
+  //-----------------//
+
+
+    const visitKey = 'site_visit_count';
+  const box = document.getElementById('visitBox');
+
+  // Get or initialize count
+  let count = localStorage.getItem(visitKey);
+  count = count ? parseInt(count) + 1 : 1;
+  localStorage.setItem(visitKey, count);
+
+  // Format to K, M, B
+  function formatCount(n) {
+    if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B';
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+    if (n >= 1_000) return (n / 1_000).toFixed(1) + 'K';
+    return n;
+  }
+
+  // Animate from 0 to current
+  let display = 0;
+  const target = count;
+  const interval = setInterval(() => {
+    display += Math.ceil((target - display) / 10);
+    box.textContent = formatCount(display);
+    if (display >= target) {
+      box.textContent = formatCount(target);
+      clearInterval(interval);
+    }
+  }, 50);
+
+</script>
+
+</body>
+</html>
